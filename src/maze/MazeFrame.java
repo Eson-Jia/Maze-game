@@ -212,7 +212,7 @@ class MazeFrame extends JFrame {
 
 		spinner_2 = new JSpinner();
 		spinner_2.setModel(new SpinnerNumberModel(11, 11, 99, 2));
-		// 控制输入
+		// 鎺у埗杈撳叆
 		editor = new JSpinner.NumberEditor(spinner_2, "0");
 		spinner_2.setEditor(editor);
 		textField = ((JSpinner.NumberEditor) spinner_2.getEditor()).getTextField();
@@ -441,8 +441,8 @@ class MazeFrame extends JFrame {
 	public static void main(String[] args) {
 		try {
 			MazeFrame mazeFrame = new MazeFrame(11, 11);
-			Toolkit tool = mazeFrame.getToolkit(); // 得到一个Toolkit对象
-			Image myimage = tool.getImage(System.getProperty("user.dir") + "/media//maze.jpg"); // 由tool获取图像
+			Toolkit tool = mazeFrame.getToolkit(); // 寰楀埌涓�涓猅oolkit瀵硅薄
+			Image myimage = tool.getImage(System.getProperty("user.dir") + "/media//maze.jpg"); // 鐢眛ool鑾峰彇鍥惧儚
 			mazeFrame.setIconImage(myimage);
 			mazeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			mazeFrame.setVisible(true);

@@ -26,9 +26,9 @@ import javax.swing.border.EtchedBorder;
 class Maze extends JPanel {
 	private Point entrance = null;
 	private Point exit = null;
-	private int rowNumber;// ĞĞÊı
-	private int colNumber;// ÁĞÊı
-	private int LatticeWidth;// ¸ñ×ÓµÄ¿í¶È
+	private int rowNumber;// è¡Œæ•°
+	private int colNumber;// åˆ—æ•°
+	private int LatticeWidth;// æ ¼å­çš„å®½åº¦
 	private Ball ball;
 	private Lattice[][] mazeLattice;
 	private boolean startTiming = false;
@@ -54,11 +54,11 @@ class Maze extends JPanel {
 		mazeLattice = new Lattice[getRowNumber() + 2][getColNumber() + 2];
 		setLayout(new BorderLayout(0, 0));
 		getTimeText().setForeground(Color.BLUE);
-		getTimeText().setFont(new Font("ËÎÌå", Font.PLAIN, 14));
+		getTimeText().setFont(new Font("å®‹ä½“", Font.PLAIN, 14));
 		getTimeText().setHorizontalAlignment(JTextField.CENTER);
 		stepNumberText.setEnabled(false);
 		getStepNumberText().setForeground(Color.BLUE);
-		getStepNumberText().setFont(new Font("ËÎÌå", Font.PLAIN, 14));
+		getStepNumberText().setFont(new Font("å®‹ä½“", Font.PLAIN, 14));
 		getStepNumberText().setHorizontalAlignment(JTextField.CENTER);
 		Label timeLabel = new Label("Time:"), stepLabel = new Label("StepNumber:");
 		timeLabel.setAlignment(Label.RIGHT);
@@ -108,7 +108,7 @@ class Maze extends JPanel {
 		mazeLattice[getExit().y][getExit().x].setPassable(true);
 	}
 
-	// ÊÇ·ñÒÑ¾­×ß³öÃÔ¹¬
+	// æ˜¯å¦å·²ç»èµ°å‡ºè¿·å®«
 	public boolean isWin() {
 		if (getExit().x == ball.getX() && getExit().y == ball.getY()) {
 			return true;
@@ -116,11 +116,11 @@ class Maze extends JPanel {
 		return false;
 	}
 
-	// Èç¹ûÒÑ¾­×ß³öÃÔ¹¬¼´Ìø³öÓÎÏ·½áÊø¶Ô»°¿ò
+	// å¦‚æœå·²ç»èµ°å‡ºè¿·å®«å³è·³å‡ºæ¸¸æˆç»“æŸå¯¹è¯æ¡†
 	private void GameOverMessage() {
 		((Timers) getTimeText()).stop();
 		try {
-			// ¶ÁÈ¡µ±Ç°java¹¤³ÌÏîÄ¿ÏÂµÄyy.wavÎÄ¼ş
+			// è¯»å–å½“å‰javaå·¥ç¨‹é¡¹ç›®ä¸‹çš„yy.wavæ–‡ä»¶
 			File file1 = new File("media//win.wav");
 			AudioClip sound = Applet.newAudioClip(file1.toURI().toURL());
 			sound.play();
@@ -134,7 +134,7 @@ class Maze extends JPanel {
 				"GameOver", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	// ÑéÖ¤ºá×İ×ø±êÊÇ·ñ³¬½ç
+	// éªŒè¯æ¨ªçºµåæ ‡æ˜¯å¦è¶…ç•Œ
 	private boolean isOutofBorder(int x, int y) {
 		if ((x == 0 && y == 1) || (x == getColNumber() + 1 && y == getRowNumber()))
 			return false;
@@ -142,7 +142,7 @@ class Maze extends JPanel {
 			return (x > getColNumber() || y > getRowNumber() || x < 1 || y < 1) ? true : false;
 	}
 
-	// »æÖÆÃÔ¹¬
+	// ç»˜åˆ¶è¿·å®«
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -178,7 +178,7 @@ class Maze extends JPanel {
 		}
 	}
 
-	// ÉèÖÃ¼üÅÌ¼àÌıÆ÷
+	// è®¾ç½®é”®ç›˜ç›‘å¬å™¨
 	synchronized private void move(int c) {
 		int tx = ball.getX(), ty = ball.getY();
 		switch (c) {
@@ -198,7 +198,7 @@ class Maze extends JPanel {
 			System.exit(0);
 			break;
 		default:
-			// ·ÀÖ¹°´¼üÅÌÉÏÆäËû¼üÈÔÈ»²úÉú¼üÅÌÒôĞ§¡¢Ê¹¼Æ²½Æ÷µİÔö
+			// é˜²æ­¢æŒ‰é”®ç›˜ä¸Šå…¶ä»–é”®ä»ç„¶äº§ç”Ÿé”®ç›˜éŸ³æ•ˆã€ä½¿è®¡æ­¥å™¨é€’å¢
 			tx = 0;
 			ty = 0;
 			break;
@@ -238,27 +238,27 @@ class Maze extends JPanel {
 		});
 	}
 
-	// ½«¼ÆÊ±Æ÷¹éÁã
+	// å°†è®¡æ—¶å™¨å½’é›¶
 	public void resetTimer() {
 		setStartTiming(false);
 		getTimeText().setText("00:00:00");
 		((Timers) timeText).restart();
 	}
 
-	// ½«¼Æ²½Æ÷¹éÁã
+	// å°†è®¡æ­¥å™¨å½’é›¶
 	public void resetStepNumber() {
 		setStepNmber(0);
 		stepNumberText.setText(Integer.toString(stepNmber));
 	}
 
-	// ÉèÖÃĞ¡ÇòµÄÎ»ÖÃ
+	// è®¾ç½®å°çƒçš„ä½ç½®
 	public void setBallPosition(Point p) {
 		ball.setX(p.x);
 		ball.setY(p.y);
 		repaint();
 	}
 
-	// ½¨Á¢Ò»¸öÃÔ¹¬
+	// å»ºç«‹ä¸€ä¸ªè¿·å®«
 	public void createMaze() {
 		init();
 		AbstractCreateMaze c = null;
@@ -272,7 +272,7 @@ class Maze extends JPanel {
 		repaint();
 	}
 
-	// ÕÒ³ö×ß³öÃÔ¹¬µÄÂ·¾¶
+	// æ‰¾å‡ºèµ°å‡ºè¿·å®«çš„è·¯å¾„
 	private Stack<Point> solveMaze(Point p) {
 		AbstractSolveMaze a = null;
 		if (getSolveMaze() == BreadthFirstSearchSolveMaze)
@@ -282,7 +282,7 @@ class Maze extends JPanel {
 		return a.solveMaze(mazeLattice, p, getExit(), getColNumber(), getRowNumber());
 	}
 
-	// ÕÒ³öĞ¡ÇòÎ»ÓÚ¸ø¶¨Î»ÖÃÊ±×ß³öÃÔ¹¬µÄÂ·¾¶
+	// æ‰¾å‡ºå°çƒä½äºç»™å®šä½ç½®æ—¶èµ°å‡ºè¿·å®«çš„è·¯å¾„
 	private Stack<Point> promptsolveMaze() {
 		AbstractSolveMaze a = null;
 		if (getSolveMaze() == BreadthFirstSearchSolveMaze)
@@ -292,7 +292,7 @@ class Maze extends JPanel {
 		return a.solveMaze(mazeLattice, new Point(ball.getX(), ball.getY()), getExit(), getColNumber(), getRowNumber());
 	}
 
-	// ½«´¦ÓÚ¸ø¶¨Î»ÖÃµÄĞ¡Çò×ß³öÃÔ¹¬µÄÂ·¾¶ÏÔÊ¾ÔÚÃÔ¹¬ÉÏÏÔÊ¾¸ø¶¨Ê±¼ä³¤£¬½öÎªcomputerSolveMazeForBallPosition()µ÷ÓÃ
+	// å°†å¤„äºç»™å®šä½ç½®çš„å°çƒèµ°å‡ºè¿·å®«çš„è·¯å¾„æ˜¾ç¤ºåœ¨è¿·å®«ä¸Šæ˜¾ç¤ºç»™å®šæ—¶é—´é•¿ï¼Œä»…ä¸ºcomputerSolveMazeForBallPosition()è°ƒç”¨
 	private void computerSolveMazeForBallPositionForTime(int time) {
 		if (getThread() == null)
 			setThread(new Thread() {
@@ -315,7 +315,7 @@ class Maze extends JPanel {
 		getThread().start();
 	}
 
-	// ÒÔtimeÊ±¼äÏÔÊ¾´¦ÓÚ¸ø¶¨Î»ÖÃĞ¡Çò×ß³öÃÔ¹¬µÄÂ·¾¶
+	// ä»¥timeæ—¶é—´æ˜¾ç¤ºå¤„äºç»™å®šä½ç½®å°çƒèµ°å‡ºè¿·å®«çš„è·¯å¾„
 	public boolean computerSolveMazeForBallPosition() {
 		setThreadStop();
 		((Timers) getTimeText()).stop();
@@ -350,7 +350,7 @@ class Maze extends JPanel {
 			return false;
 	}
 
-	// ÒÔspeedËÙ¶ÈÓÉ¼ÆËã»ú½«´¦ÓÚ³õÊ¼Î»ÖÃµÄĞ¡Çò×ß³öÃÔ¹¬£¬½öÎªcomputerSolveMaze()º¯Êıµ÷ÓÃ
+	// ä»¥speedé€Ÿåº¦ç”±è®¡ç®—æœºå°†å¤„äºåˆå§‹ä½ç½®çš„å°çƒèµ°å‡ºè¿·å®«ï¼Œä»…ä¸ºcomputerSolveMaze()å‡½æ•°è°ƒç”¨
 	private void computerSolveMazeForSpeed(int speed) {
 		setComputerDo(true);
 		Point p = null;
@@ -383,7 +383,7 @@ class Maze extends JPanel {
 		getThread().start();
 	}
 
-	// ÓÉ¼ÆËã»ú½«´¦ÓÚ³õÊ¼Î»ÖÃµÄĞ¡Çò×ß³öÃÔ¹¬
+	// ç”±è®¡ç®—æœºå°†å¤„äºåˆå§‹ä½ç½®çš„å°çƒèµ°å‡ºè¿·å®«
 	public boolean computerSolveMaze() {
 		int speed = 0;
 		setThreadStop();
@@ -624,7 +624,7 @@ class Maze extends JPanel {
 					AudioClip sound = null;
 					while (!isInterrupted())
 						try {
-							// ¶ÁÈ¡µ±Ç°java¹¤³ÌÏîÄ¿ÏÂµÄyy.wavÎÄ¼ş
+							// è¯»å–å½“å‰javaå·¥ç¨‹é¡¹ç›®ä¸‹çš„yy.wavæ–‡ä»¶
 							File file1 = new File("media//background.wav");
 							sound = Applet.newAudioClip(file1.toURI().toURL());
 							sound.play();
